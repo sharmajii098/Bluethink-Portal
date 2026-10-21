@@ -21,13 +21,13 @@
 //    private String workMode;
 //    private String status = "PENDING";
 
-    /** Origin of this entry. Older rows/default manual entries stay MANUAL. */
-    @Column(name = "entry_source", length = 20)
-    private String entrySource = "MANUAL";
-
-    /** Idempotency key for auto-generated stand-up entries (null on manual entries). */
-    @Column(name = "standup_update_id", unique = true)
-    private Long standupUpdateId;
+/** Origin of this entry. Older rows/default manual entries stay MANUAL. */
+//@Column(name = "entry_source", length = 20)
+//private String entrySource = "MANUAL";
+//
+///** Idempotency key for auto-generated stand-up entries (null on manual entries). */
+//@Column(name = "standup_update_id", unique = true)
+//private Long standupUpdateId;
 
 //}
 
@@ -76,6 +76,13 @@ public class Timesheet {
     @JoinColumn(name = "employee_profile_id")
     private EmployeeProfile employee;
 
+    @Column(name = "entry_source", length = 20)
+    private String entrySource = "MANUAL";
+
+    /** Idempotency key for auto-generated stand-up entries (null on manual entries). */
+    @Column(name = "standup_update_id", unique = true)
+    private Long standupUpdateId;
+
     /** Optional learning/shadow assignment used when a junior/trainee logs time under a senior mentor. */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mentorship_assignment_id")
@@ -97,6 +104,9 @@ public class Timesheet {
     private String managerReviewedBy;
 
     @Column(name = "manager_reviewed_at")
+
+
+
     private java.time.LocalDateTime managerReviewedAt;
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
