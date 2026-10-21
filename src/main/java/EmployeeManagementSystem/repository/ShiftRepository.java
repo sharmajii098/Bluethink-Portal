@@ -1,0 +1,1 @@
+package EmployeeManagementSystem.repository; import EmployeeManagementSystem.entity.Shift; import org.springframework.data.jpa.repository.JpaRepository; import java.util.*; public interface ShiftRepository extends JpaRepository<Shift,Long>{ Optional<Shift> findByNameIgnoreCase(String name); List<Shift> findByActiveTrueOrderByStartTimeAsc(); }

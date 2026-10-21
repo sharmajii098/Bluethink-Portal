@@ -1,0 +1,8 @@
+package EmployeeManagementSystem.service;
+import EmployeeManagementSystem.entity.EmployeeDataChangeRequest; import EmployeeManagementSystem.repository.EmployeeDataChangeRequestRepository; import org.springframework.stereotype.Service; import java.util.*;
+@Service public class EmployeeDataChangeRequestServiceImpl implements EmployeeDataChangeRequestService{
+ private final EmployeeDataChangeRequestRepository repo; public EmployeeDataChangeRequestServiceImpl(EmployeeDataChangeRequestRepository r){repo=r;}
+ public List<EmployeeDataChangeRequest> my(String u){return repo.findByUserIdOrderByCreatedAtDesc(u);} public List<EmployeeDataChangeRequest> all(){return repo.findAllByOrderByCreatedAtDesc();}
+ public EmployeeDataChangeRequest create(EmployeeDataChangeRequest x,String u,String n){if(x.getFieldName()==null||x.getFieldName().isBlank()||x.getRequestedValue()==null||x.getRequestedValue().isBlank())throw new IllegalArgumentException("Field and requested value are required."); if(repo.existsByUserIdAndFieldNameAndStatusIn(u,x.getFieldName(),List.of("SUBMITTED","UNDER_REVIEW")))throw new IllegalArgumentException("An active request already exists for this field."); x.setId(null);x.setRequestNumber("DCR-"+System.currentTimeMillis());x.setUserId(u);x.setEmployeeName(n);x.setStatus("SUBMITTED");return repo.save(x);}
+ public EmployeeDataChangeRequest review(Long id,String s,String c,String r){EmployeeDataChangeRequest x=repo.findById(id).orElseThrow(()->new NoSuchElementException("Change request not found."));if(!Set.of("UNDER_REVIEW","APPROVED","REJECTED").contains(s))throw new IllegalArgumentException("Invalid status.");x.setStatus(s);x.setReviewerUserId(r);x.setReviewerComment(c);x.setReviewedAt(java.time.LocalDateTime.now());return repo.save(x);}
+}

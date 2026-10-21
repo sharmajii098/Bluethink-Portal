@@ -1,0 +1,16 @@
+package EmployeeManagementSystem.dto;
+
+import lombok.Data;
+
+import java.math.BigDecimal;
+
+@Data
+public class DepartmentRevenueDTO {
+    private String department;
+    private String technology;
+    private BigDecimal monthlyRevenue;
+    private BigDecimal yearlyRevenue;
+    private double monthlyGrowth;
+    private double yearlyGrowth;
+    private String color;
+}

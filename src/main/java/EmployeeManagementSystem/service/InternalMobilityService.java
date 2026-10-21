@@ -1,0 +1,3 @@
+package EmployeeManagementSystem.service;
+import EmployeeManagementSystem.entity.*; import java.util.*;
+public interface InternalMobilityService {List<InternalJobPosting> postings(boolean all); InternalJobPosting createPosting(InternalJobPosting x,String u,String n); InternalJobPosting updatePosting(Long id,InternalJobPosting x); InternalJobPosting closePosting(Long id); List<InternalJobApplication> myApplications(String u); List<InternalJobApplication> applications(); InternalJobApplication apply(Long postingId,InternalJobApplication x,String u,String n); InternalJobApplication review(Long id,String status,String comment,String reviewer);}

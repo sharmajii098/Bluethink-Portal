@@ -1,0 +1,3 @@
+package EmployeeManagementSystem.service;
+import EmployeeManagementSystem.entity.*; import java.util.*;
+public interface GrievanceService { List<GrievanceCase> my(String u); List<GrievanceCase> all(); GrievanceCase get(Long id); GrievanceCase create(GrievanceCase x,String u,String n); GrievanceCase update(Long id,GrievanceCase x,String u,boolean management); GrievanceCase review(Long id,String status,String resolution,String assignee,String team,String u,boolean management); List<GrievanceComment> comments(Long id); GrievanceComment addComment(Long id,String u,String n,String text,boolean management); }
